@@ -1,9 +1,10 @@
 import React from "react";
 
 function Screen({ total }) {
+  let largest = 999999999
   return (
     <div className="screen">
-      <p>{total === "" ? "0" : total}</p>
+      <p className={total > largest ? 'long-num' : 'short-num'}>{total === "" ? "0" : total}</p>
     </div>
   );
 }
