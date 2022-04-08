@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-function Screen() {
+function Screen({total}) {
   return (
-    <div >
-        
+    <div className="screen">
+        <p>{total}</p>
     </div>
   );
 }

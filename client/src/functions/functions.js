@@ -1,15 +1,15 @@
 export const add = (a, b) => {
-    return a + b
+    return parseFloat(a) + parseFloat(b)
 }
 
 export const subtract = (a, b) => {
-    return a - b
+    return parseFloat(a) - parseFloat(b)
 }
 
 export const division = (a, b) => {
-    return a / b
+    return parseFloat(a) / parseFloat(b)
 }
 
 export const multiply = (a, b) => {
-    return a * b
+    return parseFloat(a) * parseFloat(b)
 }

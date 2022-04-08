@@ -1,10 +1,10 @@
 import './App.css';
-import Screen from './components/screen/Screen'
+import CalculatorBody from './components/calculatorBody/CalculatorBody';
 
 function App() {
   return (
     <div className="App">
-      <Screen />
+      <CalculatorBody />
     </div>
   );
 }
