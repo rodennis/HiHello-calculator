@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { add, subtract, multiply, division } from "../../functions/functions";
 
 function Buttons(props) {
-  const { setTotal, numOne, setNumOne, numTwo, setNumTwo, func, setFunc, rand, setRand } =
+  const { setTotal, numOne, setNumOne, numTwo, setNumTwo, func, setFunc, setToggle} =
     props;
 
-    const [random, setRandom] = useState('')
 
   const handleSubmit = () => {
     if (func === "+") {
       setTotal(add(numOne, numTwo));
-    //   setNumOne("");
-    //   setNumTwo("");
+      setNumOne("");
+      setNumTwo("");
       setFunc("");
     } else if (func === "-") setTotal(subtract(numOne, numTwo));
     else if (func === "x") setTotal(multiply(numOne, numTwo));
@@ -21,9 +20,11 @@ function Buttons(props) {
   const handleNumChange = (num) => {
     if (!func && numOne.length < 9) {
       setNumOne(`${numOne}${num}`);
+      setToggle(prevToggle => !prevToggle)  
     }
     if (func && numTwo.length < 9) {
       setNumTwo(`${numTwo}${num}`);
+      setToggle(prevToggle => !prevToggle)  
     }
   };
 
@@ -53,7 +54,6 @@ function Buttons(props) {
     setTotal(0);
     setNumOne("");
     setNumTwo("");
-    setRandom('')
   }
 
   const handlePercent = () => {
@@ -71,7 +71,7 @@ function Buttons(props) {
       <button onClick={(e) => handlePercent()} className="numbers">
         %
       </button>
-      <button onClick={(e) => setFunc("÷")} className="numbers">
+      <button onClick={(e) => setFunc(numOne && "÷")} className="numbers">
         ÷
       </button>
       <button onClick={(e) => handleNumChange(7)} className="numbers">
@@ -83,7 +83,7 @@ function Buttons(props) {
       <button onClick={(e) => handleNumChange(9)} className="numbers">
         9
       </button>
-      <button onClick={(e) => setFunc("x")} className="numbers">
+      <button onClick={(e) => setFunc(numOne && "x")} className="numbers">
         x
       </button>
       <button onClick={(e) => handleNumChange(4)} className="numbers">
@@ -95,7 +95,7 @@ function Buttons(props) {
       <button onClick={(e) => handleNumChange(6)} className="numbers">
         6
       </button>
-      <button onClick={(e) => setFunc("-")} className="numbers">
+      <button onClick={(e) => setFunc(numOne && "-")} className="numbers">
         -
       </button>
       <button onClick={(e) => handleNumChange(1)} className="numbers">
@@ -107,7 +107,7 @@ function Buttons(props) {
       <button onClick={(e) => handleNumChange(3)} className="numbers">
         3
       </button>
-      <button onClick={(e) => setFunc("+")} className="numbers">
+      <button onClick={(e) => setFunc(numOne && "+")} className="numbers">
         +
       </button>
       <button
