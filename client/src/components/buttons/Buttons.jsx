@@ -1,42 +1,67 @@
 import React, { useState } from "react";
 import { add, subtract, multiply, division } from "../../functions/functions";
 
-function Buttons({ setTotal, total }) {
-  const [numOne, setNumOne] = useState("");
-  const [numTwo, setNumtwo] = useState("");
-  const [func, setFunc] = useState("");
+function Buttons(props) {
+  const { setTotal, numOne, setNumOne, numTwo, setNumTwo, func, setFunc } =
+    props;
+  const [rand, setRand] = useState("");
 
   const handleSubmit = () => {
-    if (func === "+") setTotal(add(numOne, numTwo));
-    else if (func === "-") setTotal(subtract(numOne, numTwo));
+    if (func === "+") {
+      setTotal(add(numOne, numTwo));
+    //   setNumOne("");
+    //   setNumTwo("");
+      setFunc("");
+    } else if (func === "-") setTotal(subtract(numOne, numTwo));
     else if (func === "x") setTotal(multiply(numOne, numTwo));
     else setTotal(division(numOne, numTwo));
-    setNumOne("");
-    setNumtwo("");
-    setFunc("");
   };
 
   const handleNumChange = (num) => {
     if (!func && numOne.length < 9) {
       setNumOne(`${numOne}${num}`);
-      setTotal(numOne)  
-    } 
-    if (func && numTwo.length < 9){
-      setNumtwo(`${numTwo}${num}`);
-      setTotal(numTwo);
+    }
+    if (func && numTwo.length < 9) {
+      setNumTwo(`${numTwo}${num}`);
     }
   };
-  
-  
+
+  const handlePosNegChange = () => {
+    if (!func) setNumOne(`-${numOne}`);
+    else setNumTwo(`-${numTwo}`);
+  };
+
+  const handleDecimalChange = () => {
+    if (!func) setNumOne(`${numOne}.`);
+    else setNumTwo(`${numTwo}.`);
+  };
+
+  const handleChoice = (choice) => {
+    setRand(choice, handleRandom());
+  };
+
+  const handleRandom = () => {
+    if (rand === "5") {
+      console.log("working");
+      setTotal(numOne / 100);
+    } else if (rand === "AC") {
+      setTotal(0);
+      setNumOne("");
+      setNumTwo("");
+    }
+  };
+
   return (
     <div>
-      <button className="numbers">
+      <button onClick={(e) => handleChoice("AC")} className="numbers">
         AC
       </button>
-      <button className="numbers">
+      <button onClick={(e) => handlePosNegChange()} className="numbers">
         +/-
       </button>
-      <button className="numbers">%</button>
+      <button onClick={(e) => handleChoice("5")} className="numbers">
+        %
+      </button>
       <button onClick={(e) => setFunc("÷")} className="numbers">
         ÷
       </button>
@@ -84,7 +109,7 @@ function Buttons({ setTotal, total }) {
       >
         0
       </button>
-      <button  className="numbers">
+      <button onClick={(e) => handleDecimalChange()} className="numbers">
         .
       </button>
       <button onClick={(e) => handleSubmit()} className="numbers">
