@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { add, subtract, multiply, division } from "../../functions/functions";
 
 function Buttons(props) {
-  const { setTotal, numOne, setNumOne, numTwo, setNumTwo, func, setFunc } =
+  const { setTotal, numOne, setNumOne, numTwo, setNumTwo, func, setFunc, rand, setRand } =
     props;
-  const [rand, setRand] = useState("");
+
+    const [random, setRandom] = useState('')
 
   const handleSubmit = () => {
     if (func === "+") {
@@ -27,8 +28,20 @@ function Buttons(props) {
   };
 
   const handlePosNegChange = () => {
-    if (!func) setNumOne(`-${numOne}`);
-    else setNumTwo(`-${numTwo}`);
+    if (!func && numOne[0] !== '-') setNumOne(`-${numOne}`);
+    if(numOne[0] === '-'){
+        let temp = numOne.split('')
+        temp.shift()
+        let final = temp.join('')
+        setNumOne(final)
+    } 
+    if(func && numTwo[0] !== '-')setNumTwo(`-${numTwo}`);
+    else {
+        let temp = numTwo.split('')
+        temp.shift()
+        let final = temp.join('')
+        setNumTwo(final)
+    } 
   };
 
   const handleDecimalChange = () => {
@@ -36,30 +49,26 @@ function Buttons(props) {
     else setNumTwo(`${numTwo}.`);
   };
 
-  const handleChoice = (choice) => {
-    setRand(choice, handleRandom());
-  };
+  const handleClear = () => {
+    setTotal(0);
+    setNumOne("");
+    setNumTwo("");
+    setRandom('')
+  }
 
-  const handleRandom = () => {
-    if (rand === "5") {
-      console.log("working");
-      setTotal(numOne / 100);
-    } else if (rand === "AC") {
-      setTotal(0);
-      setNumOne("");
-      setNumTwo("");
-    }
-  };
+  const handlePercent = () => {
+    setTotal(numOne / 100);
+  }
 
   return (
     <div>
-      <button onClick={(e) => handleChoice("AC")} className="numbers">
+      <button onClick={(e) => handleClear()} className="numbers">
         AC
       </button>
       <button onClick={(e) => handlePosNegChange()} className="numbers">
         +/-
       </button>
-      <button onClick={(e) => handleChoice("5")} className="numbers">
+      <button onClick={(e) => handlePercent()} className="numbers">
         %
       </button>
       <button onClick={(e) => setFunc("÷")} className="numbers">

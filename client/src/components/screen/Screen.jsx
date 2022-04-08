@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Screen({total}) {
   return (
     <div className="screen">
-        <p>{total}</p>
+        <p>{total === '' ? '0' : total}</p>
     </div>
   );
 }
