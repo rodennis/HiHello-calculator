@@ -10,7 +10,6 @@ function Buttons(props) {
     setNumTwo,
     func,
     setFunc,
-    setToggle,
   } = props;
 
   const handleSubmit = () => {
@@ -26,24 +25,25 @@ function Buttons(props) {
   const handleNumChange = (num) => {
     if (!func && numOne.length < 9) {
       setNumOne(`${numOne}${num}`);
-      setToggle((prevToggle) => !prevToggle);
     }
     if (func && numTwo.length < 9) {
       setNumTwo(`${numTwo}${num}`);
-      setToggle((prevToggle) => !prevToggle);
     }
   };
 
   const handlePosNegChange = () => {
-    if (!func && numOne[0] !== "-") setNumOne(`-${numOne}`);
+    if (!func && numOne[0] !== "-") {
+      setNumOne(`-${numOne}`);
+    }
     if (numOne[0] === "-") {
       let temp = numOne.split("");
       temp.shift();
       let final = temp.join("");
       setNumOne(final);
     }
-    if (func && numTwo[0] !== "-") setNumTwo(`-${numTwo}`);
-    else {
+    if (func && numTwo[0] !== "-") {
+      setNumTwo(`-${numTwo}`);
+    } else {
       let temp = numTwo.split("");
       temp.shift();
       let final = temp.join("");

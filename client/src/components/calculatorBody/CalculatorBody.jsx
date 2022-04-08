@@ -6,15 +6,12 @@ function CalculatorBody() {
   const [numOne, setNumOne] = useState("");
   const [numTwo, setNumtwo] = useState("");
   const [func, setFunc] = useState("");
-  const [toggle, setToggle] = useState(false)
 
   useEffect(() => {
-    if (!func) setTotal(numOne);
-    else {
-      setTotal(numTwo);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [toggle]);
+    if (!func && numOne) setTotal(numOne);
+    if (func && numTwo) setTotal(numTwo);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numOne, numTwo]);
 
   return (
     <div className="calculator-body">
@@ -28,7 +25,6 @@ function CalculatorBody() {
         setNumTwo={setNumtwo}
         func={func}
         setFunc={setFunc}
-        setToggle={setToggle}
       />
     </div>
   );
