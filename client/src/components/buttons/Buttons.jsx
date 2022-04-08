@@ -2,47 +2,53 @@ import React from "react";
 import { add, subtract, multiply, division } from "../../functions/functions";
 
 function Buttons(props) {
-  const { setTotal, numOne, setNumOne, numTwo, setNumTwo, func, setFunc, setToggle} =
-    props;
-
+  const {
+    setTotal,
+    numOne,
+    setNumOne,
+    numTwo,
+    setNumTwo,
+    func,
+    setFunc,
+    setToggle,
+  } = props;
 
   const handleSubmit = () => {
-    if (func === "+") {
-      setTotal(add(numOne, numTwo));
-      setNumOne("");
-      setNumTwo("");
-      setFunc("");
-    } else if (func === "-") setTotal(subtract(numOne, numTwo));
+    if (func === "+") setTotal(add(numOne, numTwo));
+    else if (func === "-") setTotal(subtract(numOne, numTwo));
     else if (func === "x") setTotal(multiply(numOne, numTwo));
     else setTotal(division(numOne, numTwo));
+    setNumOne("");
+    setNumTwo("");
+    setFunc("");
   };
 
   const handleNumChange = (num) => {
     if (!func && numOne.length < 9) {
       setNumOne(`${numOne}${num}`);
-      setToggle(prevToggle => !prevToggle)  
+      setToggle((prevToggle) => !prevToggle);
     }
     if (func && numTwo.length < 9) {
       setNumTwo(`${numTwo}${num}`);
-      setToggle(prevToggle => !prevToggle)  
+      setToggle((prevToggle) => !prevToggle);
     }
   };
 
   const handlePosNegChange = () => {
-    if (!func && numOne[0] !== '-') setNumOne(`-${numOne}`);
-    if(numOne[0] === '-'){
-        let temp = numOne.split('')
-        temp.shift()
-        let final = temp.join('')
-        setNumOne(final)
-    } 
-    if(func && numTwo[0] !== '-')setNumTwo(`-${numTwo}`);
+    if (!func && numOne[0] !== "-") setNumOne(`-${numOne}`);
+    if (numOne[0] === "-") {
+      let temp = numOne.split("");
+      temp.shift();
+      let final = temp.join("");
+      setNumOne(final);
+    }
+    if (func && numTwo[0] !== "-") setNumTwo(`-${numTwo}`);
     else {
-        let temp = numTwo.split('')
-        temp.shift()
-        let final = temp.join('')
-        setNumTwo(final)
-    } 
+      let temp = numTwo.split("");
+      temp.shift();
+      let final = temp.join("");
+      setNumTwo(final);
+    }
   };
 
   const handleDecimalChange = () => {
@@ -54,11 +60,11 @@ function Buttons(props) {
     setTotal(0);
     setNumOne("");
     setNumTwo("");
-  }
+  };
 
   const handlePercent = () => {
     setTotal(numOne / 100);
-  }
+  };
 
   return (
     <div>
